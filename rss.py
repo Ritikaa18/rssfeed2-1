@@ -36,12 +36,12 @@ def check_feed():
     FEED = feedparser.parse(feed_url)
     print(f"check_feed status: {FEED.status}")
     entry = FEED.entries[0].title
-    if entry.id != db.get_link(feed_url).link:
+    if entry.title != db.get_link(feed_url).link:
                    # ↓ Edit this message as your needs.
       message = f"/mirror {entry.link}"
       try:
         app.send_message(log_channel, message)
-        db.update_link(feed_url, entry.id)
+        db.update_link(feed_url, entry.title)
       except FloodWait as e:
         print(f"FloodWait: {e.x} seconds")
         sleep(e.x)
@@ -58,12 +58,12 @@ app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 def check_feed1():
     FEED = feedparser.parse(feed_url1)
     entry = FEED.entries[0].title
-    if entry.id != db.get_link(feed_url1).link:
+    if entry.title != db.get_link(feed_url1).link:
                    # ↓ Edit this message as your needs.
       message = f"/dank {entry.link}"
       try:
         app.send_message(log_channel, message)
-        db.update_link(feed_url1, entry.id)
+        db.update_link(feed_url1, entry.title)
       except FloodWait as e:
         print(f"FloodWait: {e.x} seconds")
         sleep(e.x)
