@@ -85,7 +85,7 @@ app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 def check_feed2():
     FEED = feedparser.parse(feed_url2)
     entry = FEED.entries[0]
-    if entry.id != db.get_link(feed_url2).link:
+    if entry.link != db.get_link(feed_url2).link:
         if '720p' in entry.title or 'hdtv' in entry.title.lower():
             message = f"{entry.link}"
         else:
@@ -93,7 +93,7 @@ def check_feed2():
             message = f"/get {entry.enclosures[0]['href']}"
       try:
         app.send_message(log_channel, message)
-        db.update_link(feed_url2, entry.id)
+        db.update_link(feed_url2, entry.link)
       except FloodWait as e:
         print(f"FloodWait: {e.x} seconds")
         sleep(e.x)
