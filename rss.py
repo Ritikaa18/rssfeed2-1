@@ -41,14 +41,14 @@ def check_feed():
         else:
                    # ↓ Edit this message as your needs.
             message = f"/mirror {entry.link}"
-    try:
-        app.send_message(log_channel, message)
-        db.update_link(feed_url, entry.id)
-      except FloodWait as e:
-        print(f"FloodWait: {e.x} seconds")
-        sleep(e.x)
-      except Exception as e:
-        print(e)
+        try:
+          app.send_message(log_channel, message)
+          db.update_link(feed_url, entry.id)
+        except FloodWait as e:
+          print(f"FloodWait: {e.x} seconds")
+          sleep(e.x)
+        except Exception as e:
+          print(e)
     else:
       print(f"Checked RSS FEED - RARBG Movies")
 
@@ -66,14 +66,14 @@ def check_feed1():
         else:
                    # ↓ Edit this message as your needs.
             message = f"/dank {entry.link}"
-    try:
-        app.send_message(log_channel, message)
-        db.update_link(feed_url1, entry.id)
-      except FloodWait as e:
-        print(f"FloodWait: {e.x} seconds")
-        sleep(e.x)
-      except Exception as e:
-        print(e)
+        try:
+          app.send_message(log_channel, message)
+          db.update_link(feed_url1, entry.id)
+        except FloodWait as e:
+          print(f"FloodWait: {e.x} seconds")
+          sleep(e.x)
+        except Exception as e:
+          print(e)
     else:
       print(f"Checked RSS FEED1 - RARBG TV")
 
@@ -91,14 +91,14 @@ def check_feed2():
         else:
                    # ↓ Edit this message as your needs.
             message = f"/get {entry.enclosures[0]['href']}"
-    try:
-        app.send_message(log_channel, message)
-        db.update_link(feed_url2, entry.link)
-      except FloodWait as e:
-        print(f"FloodWait: {e.x} seconds")
-        sleep(e.x)
-      except Exception as e:
-        print(e)
+        try:
+          app.send_message(log_channel, message)
+          db.update_link(feed_url2, entry.link)
+        except FloodWait as e:
+          print(f"FloodWait: {e.x} seconds")
+          sleep(e.x)
+        except Exception as e:
+          print(e)
     else:
       print(f"Checked RSS FEED2 - LHD Encodes")
   
