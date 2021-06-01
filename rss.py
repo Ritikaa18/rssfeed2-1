@@ -34,7 +34,7 @@ app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 
 def check_feed():
     FEED = feedparser.parse(feed_url)
-    entry = FEED.entries[0]
+    entry = FEED.entries
     if entry.id != db.get_link(feed_url).link:
                    # ↓ Edit this message as your needs.
       message = f"/mirror {entry.link}"
