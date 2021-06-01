@@ -41,7 +41,7 @@ def check_feed():
         else:
                    # ↓ Edit this message as your needs.
             message = f"/mirror {entry.link}"
-      try:
+    try:
         app.send_message(log_channel, message)
         db.update_link(feed_url, entry.id)
       except FloodWait as e:
@@ -66,7 +66,7 @@ def check_feed1():
         else:
                    # ↓ Edit this message as your needs.
             message = f"/dank {entry.link}"
-      try:
+    try:
         app.send_message(log_channel, message)
         db.update_link(feed_url1, entry.id)
       except FloodWait as e:
@@ -91,7 +91,7 @@ def check_feed2():
         else:
                    # ↓ Edit this message as your needs.
             message = f"/get {entry.enclosures[0]['href']}"
-      try:
+    try:
         app.send_message(log_channel, message)
         db.update_link(feed_url2, entry.link)
       except FloodWait as e:
