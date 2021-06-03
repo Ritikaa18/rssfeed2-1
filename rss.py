@@ -30,27 +30,27 @@ if os.environ.get("ENV"):   # Add a ENV in Environment Variables if you wanna co
 if db.get_link(feed_url) == None:
    db.update_link(feed_url, "*")
 
-app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
-
+app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)      
+      
 def check_feed():
     FEED = feedparser.parse(feed_url)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url).link:
-        if '720p' in entry.title or 'hdtv' in entry.title.lower():
-            message = f"{entry.link}"
-        else:
+      if '720p' in entry.title or 'hdtv' in entry.title.lower() or 'galaxyrg' in entry.title.lower():
+        message = f"{entry.link}"
+      else:
                    # ↓ Edit this message as your needs.
-            message = f"/mirror {entry.link}"
-        try:
-          app.send_message(log_channel, message)
-          db.update_link(feed_url, entry.id)
-        except FloodWait as e:
-          print(f"FloodWait: {e.x} seconds")
-          sleep(e.x)
-        except Exception as e:
-          print(e)
+        message = f"/mirror {entry.link}"
+      try:
+        app.send_message(log_channel, message)
+        db.update_link(feed_url, entry.id)
+      except FloodWait as e:
+        print(f"FloodWait: {e.x} seconds")
+        sleep(e.x)
+      except Exception as e:
+        print(e)
     else:
-      print(f"Checked RSS FEED - RARBG Movies")
+      print(f"Checked RSS FEED - TGx Movies"
 
 if db.get_link(feed_url1) == None:
    db.update_link(feed_url1, "*")
