@@ -52,6 +52,7 @@ def check_feed():
     else:
       print(f"Checked RSS FEED - TGx Movies"
 
+            
 if db.get_link(feed_url1) == None:
    db.update_link(feed_url1, "*")
 
