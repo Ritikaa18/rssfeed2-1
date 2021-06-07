@@ -50,7 +50,7 @@ def check_feed():
       except Exception as e:
         print(e)
     else:
-      print(f"Checked RSS FEED - RARBG Movies"
+      print(f"Checked RSS FEED - RARBG Movies")
 
             
 if db.get_link(feed_url1) == None:
