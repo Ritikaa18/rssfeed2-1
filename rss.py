@@ -123,14 +123,14 @@ def check_feed3():
             message = f"/get {entry.enclosures[0]['href']}"
       else:
         message = f"Unwanted"
-        try:
-          app.send_message(log_channel, message)
-          db.update_link(feed_url3, entry.id)
-        except FloodWait as e:
-          print(f"FloodWait: {e.x} seconds")
-          sleep(e.x)
-        except Exception as e:
-          print(e)
+      try:
+        app.send_message(log_channel, message)
+        db.update_link(feed_url3, entry.id)
+      except FloodWait as e:
+        print(f"FloodWait: {e.x} seconds")
+        sleep(e.x)
+      except Exception as e:
+        print(e)
     else:
       print(f"Checked RSS FEED3 - Lime Movies")        
         
