@@ -120,7 +120,7 @@ def check_feed3():
             message = f"Unwanted"
         else:
                    # ↓ Edit this message as your needs.
-            message = f"/get {entry.enclosures[0]['href']}"
+            message = f"/mirror {entry.enclosures[0]['href']}"
       else:
         message = f"Unwanted"
       try:
