@@ -89,7 +89,7 @@ def check_feed2():
     FEED = feedparser.parse(feed_url2)
     entry = FEED.entries[0]
     if entry.link != db.get_link(feed_url2).link:
-        if '720p' in entry.title or 'hdtv' in entry.title.lower() or 'galaxyrg' in entry.title.lower()  or 'mvgroup' in entry.title.lower()  or '480p' in entry.title.lower()  or 'xvid' in entry.title.lower()  or 'beitai' in entry.title.lower():
+        if 'leagueweb' in entry.title.lower() or 'hdtv' in entry.title.lower() or 'lmovhd' in entry.title.lower()  or 'cmct' in entry.title.lower()  or 'ltvhd' in entry.title.lower()  or 'leaguetv' in entry.title.lower()  or 'beitai' in entry.title.lower()  or 'pterweb' in entry.title.lower()  or 'bae' in entry.title.lower():
             message = f"{entry.link}"
         else:
                    # ↓ Edit this message as your needs.
