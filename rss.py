@@ -116,7 +116,7 @@ def check_feed3():
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url3).link:
       if 'Movies' in entry.category:
-        if '720p' in entry.title or 'hdtv' in entry.title.lower() or 'tgx' in entry.title.lower()  or 'yts' in entry.title.lower()  or '480p' in entry.title.lower()  or 'xvid' in entry.title.lower():
+        if '720p' in entry.title or 'hdtv' in entry.title.lower() or 'BRAZINO777' in entry.title  or 'yts' in entry.title.lower()  or '480p' in entry.title.lower()  or 'xvid' in entry.title.lower()  or 'mp4' in entry.title  or 'armor' in entry.title.lower():
             message = f"Unwanted"
         else:
                    # ↓ Edit this message as your needs.
