@@ -177,7 +177,7 @@ def check_feed5():
     FEED = feedparser.parse(feed_url5)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url5).link:
-            message = f"/nani {entry.link}"
+        message = f"/nani {entry.link}"
         try:
           app.send_message(log_channel, message)
           db.update_link(feed_url5, entry.id)
@@ -199,7 +199,7 @@ def check_feed6():
     FEED = feedparser.parse(feed_url6)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url6).link:
-            message = f"/nani {entry.link}"
+        message = f"/nani {entry.link}"
         try:
           app.send_message(log_channel, message)
           db.update_link(feed_url6, entry.id)
@@ -221,7 +221,7 @@ def check_feed7():
     FEED = feedparser.parse(feed_url7)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url7).link:
-            message = f"/nani {entry.link}"
+        message = f"/nani {entry.link}"
         try:
           app.send_message(log_channel, message)
           db.update_link(feed_url7, entry.id)
