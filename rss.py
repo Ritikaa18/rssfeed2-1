@@ -150,7 +150,7 @@ def check_feed4():
             message = f"unwanted"
         try:
           app.send_message(log_channel, message)
-          db.update_link(feed_url4, entry.link)
+          db.update_link(feed_url4, entry.id)
         except FloodWait as e:
           print(f"FloodWait: {e.x} seconds")
           sleep(e.x)
