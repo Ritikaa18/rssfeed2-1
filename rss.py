@@ -212,7 +212,7 @@ def check_feed6():
       print(f"Checked RSS FEED6 - Erai 1080p")       
  
 
- if db.get_link(feed_url7) == None:
+if db.get_link(feed_url7) == None:
    db.update_link(feed_url7, "*")
 
 app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)      
