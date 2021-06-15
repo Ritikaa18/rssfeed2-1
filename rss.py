@@ -143,14 +143,14 @@ app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 def check_feed4():
     FEED = feedparser.parse(feed_url4)
     entry = FEED.entries[0]
-    if entry.id != db.get_link(feed_url4).link:
+    if entry.link != db.get_link(feed_url4).link:
         if '1080p' in entry.title and 'cinefeel' in entry.title.lower() and 'freeleech' in entry.title.lower()  or '1080p' in entry.title and 'ntb' in entry.title.lower() and 'freeleech' in entry.title.lower()  or '1080p' in entry.title and 'tepes' in entry.title.lower() and 'freeleech' in entry.title.lower():
             message = f"/wink {entry.link}"
         else:
             message = f"unwanted"
         try:
           app.send_message(log_channel, message)
-          db.update_link(feed_url4, entry.id)
+          db.update_link(feed_url4, entry.link)
         except FloodWait as e:
           print(f"FloodWait: {e.x} seconds")
           sleep(e.x)
@@ -158,8 +158,7 @@ def check_feed4():
           print(e)
     else:
       print(f"Checked RSS FEED4 - Filelist")
-        
-        
+                
         
 scheduler = BackgroundScheduler()
 scheduler.add_job(check_feed, "interval", seconds=check_interval, max_instances=max_instances, misfire_grace_time=None)
