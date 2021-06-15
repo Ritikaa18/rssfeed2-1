@@ -176,11 +176,11 @@ app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 def check_feed5():
     FEED = feedparser.parse(feed_url5)
     entry = FEED.entries[0]
-    if entry.id != db.get_link(feed_url5).link:
+    if entry.title != db.get_link(feed_url5).link:
         message = f"/nani {entry.link}"
         try:
           app.send_message(log_channel, message)
-          db.update_link(feed_url5, entry.id)
+          db.update_link(feed_url5, entry.title)
         except FloodWait as e:
           print(f"FloodWait: {e.x} seconds")
           sleep(e.x)
@@ -198,11 +198,11 @@ app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 def check_feed6():
     FEED = feedparser.parse(feed_url6)
     entry = FEED.entries[0]
-    if entry.id != db.get_link(feed_url6).link:
+    if entry.title != db.get_link(feed_url6).link:
         message = f"/nani {entry.link}"
         try:
           app.send_message(log_channel, message)
-          db.update_link(feed_url6, entry.id)
+          db.update_link(feed_url6, entry.title)
         except FloodWait as e:
           print(f"FloodWait: {e.x} seconds")
           sleep(e.x)
@@ -220,11 +220,11 @@ app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 def check_feed7():
     FEED = feedparser.parse(feed_url7)
     entry = FEED.entries[0]
-    if entry.id != db.get_link(feed_url7).link:
+    if entry.title != db.get_link(feed_url7).link:
         message = f"/nani {entry.link}"
         try:
           app.send_message(log_channel, message)
-          db.update_link(feed_url7, entry.id)
+          db.update_link(feed_url7, entry.title)
         except FloodWait as e:
           print(f"FloodWait: {e.x} seconds")
           sleep(e.x)
