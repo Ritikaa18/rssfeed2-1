@@ -125,6 +125,8 @@ def check_feed3():
       if 'Movies' in entry.category:
         if '720p' in entry.title or 'hdtv' in entry.title.lower() or 'BRAZINO777' in entry.title  or 'yts' in entry.title.lower()  or '480p' in entry.title.lower()  or 'xvid' in entry.title.lower()  or 'mp4' in entry.title  or 'armor' in entry.title.lower():
             message = f"unwanted"
+        elif 'remux' in entry.title.lower():
+            message = f"/kink {entry.enclosures[0]['href']}"            
         else:
             message = f"/mirror {entry.enclosures[0]['href']}"
       else:
