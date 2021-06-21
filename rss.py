@@ -248,7 +248,7 @@ def check_feed8():
        if '1080p' in entry.title and 'wiki' in entry.title.lower() or '1080p' in entry.title and 'beast' in entry.title.lower() or '1080p' in entry.title and 'chd' in entry.title.lower():
          message = f"/get {entry.enclosures[0]['href']}"
        else:
-           pass
+         message = f"unwanted"
        try:
         app.send_message(log_channel, message)
         db.update_link(feed_url8, entry.id)
