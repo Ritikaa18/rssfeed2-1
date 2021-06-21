@@ -249,13 +249,13 @@ def check_feed8():
          message = f"/get {entry.enclosures[0]['href']}"
        else:
            pass
-      try:
+       try:
         app.send_message(log_channel, message)
         db.update_link(feed_url8, entry.id)
-      except FloodWait as e:
+       except FloodWait as e:
         print(f"FloodWait: {e.x} seconds")
         sleep(e.x)
-      except Exception as e:
+       except Exception as e:
         print(e)
     else:
       print(f"Checked RSS FEED8 - HDTime Encodes")           
