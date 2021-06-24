@@ -124,12 +124,12 @@ def check_feed3():
     FEED = feedparser.parse(feed_url3)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url3).link:
-        if '720p' in entry.title or 'BRAZINO777' in entry.title or 'yts' in entry.title.lower() or 'avi' in entry.title.lower() or 'xvid' in entry.title.lower() or 'mp4' in entry.title or 'galaxyrg' in entry.title.lower()  or '480p' in entry.title  or 'armor' in entry.title.lower()  or 'domino' in entry.title.lower()  or 'msltel' in entry.title.lower()  or 'cam' in entry.title.lower()  or 'megapeer' in entry.title.lower()  or 'EP' in entry.title or 'hdtv' in entry.title.lower() or 'avc' in entry.title.lower():
-            message = f"unwanted"
-        elif 'remux' in entry.title.lower():
-            message = f"/kink {entry.enclosures[0]['href']}"            
-        else:
-            message = f"/mirror {entry.enclosures[0]['href']}"
+      if '720p' in entry.title or 'BRAZINO777' in entry.title or 'yts' in entry.title.lower() or 'avi' in entry.title.lower() or 'xvid' in entry.title.lower() or 'mp4' in entry.title or 'galaxyrg' in entry.title.lower()  or '480p' in entry.title  or 'armor' in entry.title.lower()  or 'domino' in entry.title.lower()  or 'msltel' in entry.title.lower()  or 'cam' in entry.title.lower()  or 'megapeer' in entry.title.lower()  or 'EP' in entry.title or 'hdtv' in entry.title.lower() or 'avc' in entry.title.lower():
+          message = f"unwanted"
+      elif 'remux' in entry.title.lower():
+          message = f"/kink {entry.enclosures[0]['href']}"            
+      else:
+          message = f"/mirror {entry.enclosures[0]['href']}"
       try:
         app.send_message(log_channel, message)
         db.update_link(feed_url3, entry.id)
