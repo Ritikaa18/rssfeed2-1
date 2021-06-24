@@ -99,7 +99,7 @@ def check_feed2():
     FEED = feedparser.parse(feed_url2)
     entry = FEED.entries[0]
     if entry.link != db.get_link(feed_url2).link:
-        if 'leagueweb' in entry.title.lower() or 'hdtv' in entry.title.lower() or 'lmovhd' in entry.title.lower()  or 'cmct' in entry.title.lower()  or 'ltvhd' in entry.title.lower()  or 'leaguetv' in entry.title.lower()  or 'beitai' in entry.title.lower()  or 'pterweb' in entry.title.lower()  or 'bae' in entry.title.lower() or '720p' in entry.title  or 'leaguenf' in entry.title.lower():
+        if 'leagueweb' in entry.title.lower() or 'hdtv' in entry.title.lower() or 'lmovhd' in entry.title.lower()  or 'cmct' in entry.title.lower()  or 'ltvhd' in entry.title.lower()  or 'leaguetv' in entry.title.lower()  or 'beitai' in entry.title.lower()  or 'pterweb' in entry.title.lower()  or 'bae' in entry.title.lower() or '720p' in entry.title  or 'leaguenf' in entry.title.lower()  or 'hdsweb' in entry.title.lower():
             message = f"unwanted"
         else:
             message = f"/get {entry.enclosures[0]['href']}"
@@ -124,15 +124,12 @@ def check_feed3():
     FEED = feedparser.parse(feed_url3)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url3).link:
-      if 'Movies' in entry.category:
-        if '720p' in entry.title or 'BRAZINO777' in entry.title or 'yts' in entry.title.lower() or 'avi' in entry.title.lower() or 'xvid' in entry.title.lower() or 'mp4' in entry.title or 'galaxyrg' in entry.title.lower()  or '480p' in entry.title  or 'armor' in entry.title.lower()  or 'domino' in entry.title.lower()  or 'msltel' in entry.title.lower()  or 'cam' in entry.title.lower()  or 'megapeer' in entry.title.lower()  or 'EP' in entry.title or 'hdtv' in entry.title.lower():
+        if '720p' in entry.title or 'BRAZINO777' in entry.title or 'yts' in entry.title.lower() or 'avi' in entry.title.lower() or 'xvid' in entry.title.lower() or 'mp4' in entry.title or 'galaxyrg' in entry.title.lower()  or '480p' in entry.title  or 'armor' in entry.title.lower()  or 'domino' in entry.title.lower()  or 'msltel' in entry.title.lower()  or 'cam' in entry.title.lower()  or 'megapeer' in entry.title.lower()  or 'EP' in entry.title or 'hdtv' in entry.title.lower() or 'avc' in entry.title.lower():
             message = f"unwanted"
         elif 'remux' in entry.title.lower():
             message = f"/kink {entry.enclosures[0]['href']}"            
         else:
             message = f"/mirror {entry.enclosures[0]['href']}"
-      else:
-        message = f"unwanted"
       try:
         app.send_message(log_channel, message)
         db.update_link(feed_url3, entry.id)
@@ -154,7 +151,9 @@ def check_feed4():
     FEED = feedparser.parse(feed_url4)
     entry = FEED.entries[0]
     if entry.link != db.get_link(feed_url4).link:
-        if '1080p' in entry.title and 'cinefeel' in entry.title.lower() and 'freeleech' in entry.title.lower()  or '1080p' in entry.title and 'ntb' in entry.title.lower() and 'freeleech' in entry.title.lower()  or '1080p' in entry.title and 'tepes' in entry.title.lower() and 'freeleech' in entry.title.lower():
+        criterion_1_list = ["1080p", "FreeLeech"]
+        criterion_2_list = ["cinefeel", "ntb", "tepes", "playweb", "telly", "tommy", "monkee", "kings", "sbr", "don", "btn", "ijp", "T7ST", "RCVR", "visum"]
+        if all(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list) and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list):
             message = f"/wink {entry.link}"
         else:
             message = f"unwanted"
@@ -245,8 +244,12 @@ def check_feed8():
     FEED = feedparser.parse(feed_url8)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url8).link:
-       if '1080p' in entry.title and 'wiki' in entry.title.lower() or '1080p' in entry.title and 'beast' in entry.title.lower() or '1080p' in entry.title and 'chd' in entry.title.lower():
+       criterion_1 = "1080p"
+       criterion_2_list = ["WiKi", "beAst", "CHD", "ANK", "LHD"]
+       if criterion_1 in entry.title.lower() and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list):         
          message = f"/get {entry.enclosures[0]['href']}"
+       elif 'remux' in entry.title.lower():
+         message = f"/kink {entry.enclosures[0]['href']}"
        else:
          message = f"unwanted"
        try:
