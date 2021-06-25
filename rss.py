@@ -130,7 +130,7 @@ def check_feed3():
     if entry.id != db.get_link(feed_url3).link:
       criterion_1_list = ["720p", "hdtv", "brazino777", "yts", "480p", "576p", "xvid", "hdrip", "cam", "avi", "mp4", "galaxyrg", "domino", "armor", "ep", "msltel", "hindi", "megapeer", "avc", "1400MB", "episode", "WEB-DLRip", "season"]
       criterion_2 = "REMUX"
-      if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list) or 'BRAZINO777' in entry.title or 'yts' in entry.title.lower():
+      if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list) or 'BRAZINO777' in entry.title or 'yts' in entry.title.lower() or '1920' in entry.title:
           message = f"unwanted"
       elif criterion_2 in entry.title.lower():
           message = f"/kink {entry.enclosures[0]['href']}"            
