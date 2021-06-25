@@ -48,7 +48,7 @@ def check_feed():
     FEED = feedparser.parse(feed_url)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url).link:
-      criterion_1_list = ["720p", "HDTV", "galaxyrg", "mvgroup", "480p", "xvid"]
+      criterion_1_list = ["720p", "hdtv", "galaxyrg", "mvgroup", "480p", "xvid"]
       criterion_2 = "remux"
       if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
         message = f"unwanted"
@@ -77,7 +77,7 @@ def check_feed1():
     FEED = feedparser.parse(feed_url1)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url1).link:
-        criterion_1_list = ["720p", "HDTV", "galaxyrg", "mvgroup", "480p", "xvid", "ion10"]
+        criterion_1_list = ["720p", "hdtv", "galaxyrg", "mvgroup", "480p", "xvid", "ion10"]
         if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
             message = f"unwanted"
         else:
@@ -102,7 +102,7 @@ def check_feed2():
     FEED = feedparser.parse(feed_url2)
     entry = FEED.entries[0]
     if entry.link != db.get_link(feed_url2).link:
-        criterion_1_list = ["720p", "HDTV", "leagueweb", "lmovhd", "480p", "576p", "cmct", "ltvhd", "beitai", "leaguetv", "pterweb", "bae", "hdsweb"]
+        criterion_1_list = ["720p", "hdtv", "leagueweb", "lmovhd", "480p", "576p", "cmct", "ltvhd", "beitai", "leaguetv", "pterweb", "bae", "hdsweb", "tv"]
         if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
             message = f"unwanted"
         else:
@@ -128,8 +128,8 @@ def check_feed3():
     FEED = feedparser.parse(feed_url3)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url3).link:
-      criterion_1_list = ["720p", "hdtv", "brazino777", "yts", "480p", "576p", "xvid", "hdrip", "cam", "avi", "mp4", "galaxyrg", "domino", "armor", "ep", "msltel", "hindi", "megapeer", "avc", "1400MB", "episode", "WEB-DLRip", "season"]
-      criterion_2 = "REMUX"
+      criterion_1_list = ["720p", "hdtv", "brazino777", "yts", "480p", "576p", "xvid", "hdrip", "cam", "avi", "mp4", "galaxyrg", "domino", "armor", "ep", "msltel", "hindi", "megapeer", "avc", "1400mb", "episode", "web-dlrip", "season", "1920"]
+      criterion_2 = "remux"
       if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list) or 'BRAZINO777' in entry.title or 'yts' in entry.title.lower() or '1920' in entry.title:
           message = f"unwanted"
       elif criterion_2 in entry.title.lower():
@@ -157,8 +157,8 @@ def check_feed4():
     FEED = feedparser.parse(feed_url4)
     entry = FEED.entries[0]
     if entry.link != db.get_link(feed_url4).link:
-        criterion_1_list = ["1080p", "FreeLeech"]
-        criterion_2_list = ["cinefeel", "ntb", "tepes", "playweb", "telly", "tommy", "monkee", "kings", "sbr", "don", "btn", "ijp", "T7ST", "RCVR", "visum"]
+        criterion_1_list = ["1080p", "freeleech"]
+        criterion_2_list = ["cinefeel", "ntb", "tepes", "playweb", "telly", "tommy", "monkee", "kings", "sbr", "don", "btn", "ijp", "t7st", "rcvr", "visum"]
         if all(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list) and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list):
             message = f"/wink {entry.link}"
         else:
