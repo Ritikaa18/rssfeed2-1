@@ -48,9 +48,11 @@ def check_feed():
     FEED = feedparser.parse(feed_url)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url).link:
-      if '720p' in entry.title or 'hdtv' in entry.title.lower() or 'galaxyrg' in entry.title.lower()  or 'mvgroup' in entry.title.lower()  or '480p' in entry.title.lower()  or 'xvid' in entry.title.lower():
+      criterion_1_list = ["720p", "HDTV", "galaxyrg", "mvgroup", "480p", "xvid"]
+      criterion_2 = "REMUX"
+      if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
         message = f"unwanted"
-      elif 'remux' in entry.title.lower():
+      elif criterion_2 in entry.title.lower():
         message = f"/kink {entry.link}"
       else:
         message = f"/mirror {entry.link}"
@@ -75,7 +77,8 @@ def check_feed1():
     FEED = feedparser.parse(feed_url1)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url1).link:
-        if '720p' in entry.title or 'hdtv' in entry.title.lower() or 'galaxyrg' in entry.title.lower()  or 'mvgroup' in entry.title.lower()  or '480p' in entry.title.lower()  or 'xvid' in entry.title.lower()  or 'ion10' in entry.title.lower():
+        criterion_1_list = ["720p", "HDTV", "galaxyrg", "mvgroup", "480p", "xvid", "ion10"]
+        if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
             message = f"unwanted"
         else:
             message = f"/dank {entry.link}"
@@ -99,7 +102,8 @@ def check_feed2():
     FEED = feedparser.parse(feed_url2)
     entry = FEED.entries[0]
     if entry.link != db.get_link(feed_url2).link:
-        if 'leagueweb' in entry.title.lower() or 'hdtv' in entry.title.lower() or 'lmovhd' in entry.title.lower()  or 'cmct' in entry.title.lower()  or 'ltvhd' in entry.title.lower()  or 'leaguetv' in entry.title.lower()  or 'beitai' in entry.title.lower()  or 'pterweb' in entry.title.lower()  or 'bae' in entry.title.lower() or '720p' in entry.title  or 'leaguenf' in entry.title.lower()  or 'hdsweb' in entry.title.lower():
+        criterion_1_list = ["720p", "HDTV", "leagueweb", "lmovhd", "480p", "576p", "cmct", "ltvhd", "beitai", "leaguetv", "pterweb", "bae", "hdsweb"]
+        if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
             message = f"unwanted"
         else:
             message = f"/get {entry.enclosures[0]['href']}"
@@ -124,9 +128,11 @@ def check_feed3():
     FEED = feedparser.parse(feed_url3)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url3).link:
-      if '720p' in entry.title or 'BRAZINO777' in entry.title or 'yts' in entry.title.lower() or 'avi' in entry.title.lower() or 'xvid' in entry.title.lower() or 'mp4' in entry.title or 'galaxyrg' in entry.title.lower()  or '480p' in entry.title  or 'armor' in entry.title.lower()  or 'domino' in entry.title.lower()  or 'msltel' in entry.title.lower()  or 'cam' in entry.title.lower()  or 'megapeer' in entry.title.lower()  or 'EP' in entry.title or 'hdtv' in entry.title.lower() or 'avc' in entry.title.lower():
+      criterion_1_list = ["720p", "HDTV", "BRAZINO777", "YTS", "480p", "576p", "XVID", "hdrip", "cam", "avi", "mp4", "galaxyrg", "domino", "armor", "EP", "msltel", "hindi", "megapeer", "avc", "1400MB", "episode", "WEB-DLRip", "season"]
+      criterion_2 = "REMUX"
+      if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list)
           message = f"unwanted"
-      elif 'remux' in entry.title.lower():
+      elif criterion_2 in entry.title.lower():
           message = f"/kink {entry.enclosures[0]['href']}"            
       else:
           message = f"/mirror {entry.enclosures[0]['href']}"
