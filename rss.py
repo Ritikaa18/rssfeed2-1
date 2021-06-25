@@ -49,7 +49,7 @@ def check_feed():
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url).link:
       criterion_1_list = ["720p", "HDTV", "galaxyrg", "mvgroup", "480p", "xvid"]
-      criterion_2 = "REMUX"
+      criterion_2 = "remux"
       if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
         message = f"unwanted"
       elif criterion_2 in entry.title.lower():
@@ -128,7 +128,7 @@ def check_feed3():
     FEED = feedparser.parse(feed_url3)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url3).link:
-      criterion_1_list = ["720p", "HDTV", "BRAZINO777", "YTS", "480p", "576p", "XVID", "hdrip", "cam", "avi", "mp4", "galaxyrg", "domino", "armor", "EP", "msltel", "hindi", "megapeer", "avc", "1400MB", "episode", "WEB-DLRip", "season"]
+      criterion_1_list = ["720p", "hdtv", "brazino777", "yts", "480p", "576p", "xvid", "hdrip", "cam", "avi", "mp4", "galaxyrg", "domino", "armor", "ep", "msltel", "hindi", "megapeer", "avc", "1400MB", "episode", "WEB-DLRip", "season"]
       criterion_2 = "REMUX"
       if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list) or 'BRAZINO777' in entry.title or 'yts' in entry.title.lower():
           message = f"unwanted"
@@ -251,7 +251,7 @@ def check_feed8():
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url8).link:
        criterion_1 = "1080p"
-       criterion_2_list = ["WiKi", "beAst", "CHD", "ANK", "LHD"]
+       criterion_2_list = ["wiki", "beast", "chd", "ank", "lhd"]
        if criterion_1 in entry.title.lower() and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list):         
          message = f"/get {entry.enclosures[0]['href']}"
        elif 'remux' in entry.title.lower():
