@@ -157,9 +157,9 @@ def check_feed4():
     FEED = feedparser.parse(feed_url4)
     entry = FEED.entries[0]
     if entry.link != db.get_link(feed_url4).link:
-        criterion_1_list = ["1080p", "freeleech"]
+        criterion_1_list = ["1080p", "FreeLeech"]
         criterion_2_list = ["cinefeel", "ntb", "tepes", "playweb", "telly", "tommy", "monkee", "kings", "sbr", "don", "btn", "ijp", "t7st", "rcvr", "visum"]
-        if all(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list) and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list):
+        if all(criterion_1 in entry.title for criterion_1 in criterion_1_list) and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list):
             message = f"/wink {entry.link}"
         else:
             message = f"unwanted"
