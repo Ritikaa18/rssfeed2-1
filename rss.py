@@ -48,7 +48,7 @@ def check_feed():
     FEED = feedparser.parse(feed_url)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url).link:
-        criterion_1_list = ["720p", "hdtv", "galaxyrg", "mvgroup", "480p", "xvid", "ddr", "brazino777", "armor", "mp4", "melbet", "tgx", "cam", "hdrip", "avi", "web-dlrip", "meguil"]
+        criterion_1_list = ["720p", "hdtv", "galaxyrg", "mvgroup", "480p", "xvid", "ddr", "brazino777", "armor", "mp4", "melbet", "tgx", "cam", "hdrip", "avi", "web-dlrip", "meguil", "720", "saicord", "hindi"]
         criterion_2 = "remux"
         if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
             message = f"unwanted"
@@ -102,7 +102,7 @@ def check_feed2():
     FEED = feedparser.parse(feed_url2)
     entry = FEED.entries[0]
     if entry.link != db.get_link(feed_url2).link:
-        criterion_1_list = ["720p", "hdtv", "leagueweb", "lmovhd", "480p", "576p", "cmct", "ltvhd", "beitai", "leaguetv", "pterweb", "bae", "hdsweb"]
+        criterion_1_list = ["720p", "hdtv", "leagueweb", "lmovhd", "480p", "576p", "cmct", "ltvhd", "beitai", "leaguetv", "pterweb", "bae", "hdsweb", "720"]
         if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
             message = f"unwanted"
         else:
@@ -128,7 +128,7 @@ def check_feed3():
     FEED = feedparser.parse(feed_url3)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url3).link:
-      criterion_1_list = ["720p", "hdtv", "tgx", "brazino777", "yts", "480p", "576p", "xvid", "hdrip", "cam", "avi", "mp4", "galaxyrg", "domino", "armor", "ep", "msltel", "hindi", "megapeer", "avc", "1400mb", "episode", "web-dlrip", "season", "1920", "1440", "ion10"]
+      criterion_1_list = ["720p", "hdtv", "tgx", "brazino777", "yts", "480p", "576p", "xvid", "hdrip", "cam", "avi", "mp4", "galaxyrg", "domino", "armor", "ep", "msltel", "hindi", "megapeer", "avc", "1400mb", "episode", "web-dlrip", "season", "1920", "1440", "ion10", "720", "playlist"]
       criterion_2 = "remux"
       if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
           message = f"unwanted"
