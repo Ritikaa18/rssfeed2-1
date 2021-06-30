@@ -48,24 +48,24 @@ def check_feed():
     FEED = feedparser.parse(feed_url)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url).link:
-      criterion_1_list = ["720p", "hdtv", "galaxyrg", "mvgroup", "480p", "xvid", "ion10"]
-      criterion_2 = "remux"
-      if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
-        message = f"unwanted"
-      elif criterion_2 in entry.title.lower():
-        message = f"/kink {entry.link}"
-      else:
-        message = f"/mirror {entry.link}"
-      try:
-        app.send_message(log_channel, message)
-        db.update_link(feed_url, entry.id)
-      except FloodWait as e:
-        print(f"FloodWait: {e.x} seconds")
-        sleep(e.x)
-      except Exception as e:
-        print(e)
+        criterion_1_list = ["720p", "hdtv", "galaxyrg", "mvgroup", "480p", "xvid", "ddr", "brazino777", "armor", "mp4", "melbet", "tgx", "cam", "hdrip", "avi", "web-dlrip", "meguil"]
+        criterion_2 = "remux"
+        if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
+            message = f"unwanted"
+        elif criterion_2 in entry.title.lower():
+            message = f"/kink {entry.link}"
+        else:    
+            message = f"/mirror {entry.link}"
+        try:
+          app.send_message(log_channel, message)
+          db.update_link(feed_url, entry.id)
+        except FloodWait as e:
+          print(f"FloodWait: {e.x} seconds")
+          sleep(e.x)
+        except Exception as e:
+          print(e)
     else:
-      print(f"Checked RSS FEED - RARBG Movies")
+      print(f"Checked RSS FEED - TGx Movies")
 
             
 if db.get_link(feed_url1) == None:
