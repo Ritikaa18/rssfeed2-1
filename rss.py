@@ -103,8 +103,12 @@ def check_feed2():
     entry = FEED.entries[0]
     if entry.link != db.get_link(feed_url2).link:
         criterion_1_list = ["720p", "hdtv", "leagueweb", "lmovhd", "480p", "576p", "cmct", "ltvhd", "beitai", "leaguetv", "pterweb", "bae", "hdsweb", "720", "hdctv"]
+        criterion_2_list = ["2160p", "1080p"]
+        criterion_3_list = ["cinefeel", "ntb", "tepes", "appletor", "telly", "tommy", "monkee", "kings", "sbr", "don", "btn", "ijp", "t7st", "rcvr", "visum", "ntg", "apj69", "trollhd", "trolluhd", "flux", "sigma"]
         if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
             message = f"unwanted"
+        elif any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list) and any(criterion_3 in entry.title.lower() for criterion_3 in criterion_3_list):
+            message = f"/wink {entry.enclosures[0]['href']}"
         else:
             message = f"/get {entry.enclosures[0]['href']}"
         try:
@@ -128,7 +132,7 @@ def check_feed3():
     FEED = feedparser.parse(feed_url3)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url3).link:
-      criterion_1_list = ["720p", "hdtv", "tgx", "brazino777", "yts", "480p", "576p", "xvid", "hdrip", "cam", "avi", "mp4", "galaxyrg", "domino", "armor", "ep", "msltel", "hindi", "megapeer", "avc", "1400mb", "episode", "web-dlrip", "season", "1920", "1440", "ion10", "720", "playlist"]
+      criterion_1_list = ["720p", "hdtv", "tgx", "brazino777", "yts", "480p", "576p", "xvid", "hdrip", "cam", "avi", "mp4", "galaxyrg", "domino", "armor", "ep", "msltel", "hindi", "megapeer", "avc", "1400mb", "episode", "web-dlrip", "season", "1920", "1440", "ion10", "720", "playlist", "rarbg"]
       criterion_2 = "remux"
       if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
           message = f"unwanted"
@@ -158,7 +162,7 @@ def check_feed4():
     entry = FEED.entries[0]
     if entry.link != db.get_link(feed_url4).link:
         criterion_1_list = ["1080p", "freeleech"]
-        criterion_2_list = ["cinefeel", "ntb", "tepes", "playweb", "telly", "tommy", "monkee", "kings", "sbr", "don", "btn", "ijp", "t7st", "rcvr", "visum", "ntg", "apj69", "trollhd", "trolluhd"]
+        criterion_2_list = ["cinefeel", "ntb", "tepes", "playweb", "telly", "tommy", "monkee", "kings", "sbr", "don", "btn", "ijp", "t7st", "rcvr", "visum", "ntg", "apj69", "trollhd", "trolluhd", "appletor", "flux", "sigma"]
         if all(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list) and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list):
             message = f"/wink {entry.link}"
         else:
