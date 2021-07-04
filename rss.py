@@ -104,10 +104,10 @@ def check_feed2():
     if entry.link != db.get_link(feed_url2).link:
         criterion_1_list = ["720p", "hdtv", "leagueweb", "lmovhd", "480p", "576p", "cmct", "ltvhd", "beitai", "leaguetv", "pterweb", "bae", "hdsweb", "720", "hdctv"]
         criterion_2_list = ["2160p", "1080p"]
-        criterion_3_list = ["cinefeel", "ntb", "tepes", "appletor", "telly", "tommy", "monkee", "kings", "sbr", "don", "btn", "ijp", "t7st", "rcvr", "visum", "ntg", "apj69", "trollhd", "trolluhd", "flux", "sigma"]
+        criterion_3_list = ["cinefeel", "ntb", "tepes", "appletor", "telly", "tommy", "monkee", "kings", "sbr", "don", "btn", "ijp", "t7st", "rcvr", "visum", "ntg", "apj69", "trollhd", "trolluhd", "flux", "sigma", "epsilon", "bordure", "leaguenf", "cinefile"]
         if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
             message = f"unwanted"
-        elif any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list) and any(criterion_3 in entry.title.lower() for criterion_3 in criterion_3_list):
+        elif "tv" in entry.category.lower() and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list) and any(criterion_3 in entry.title.lower() for criterion_3 in criterion_3_list):
             message = f"/wink {entry.enclosures[0]['href']}"
         else:
             message = f"/get {entry.enclosures[0]['href']}"
@@ -232,7 +232,17 @@ def check_feed7():
     FEED = feedparser.parse(feed_url7)
     entry = FEED.entries[0]
     if entry.title != db.get_link(feed_url7).link:
-        message = f"/nani {entry.link}"
+        criterion_1_list = ["720p", "hdtv", "leagueweb", "lmovhd", "480p", "576p", "cmct", "ltvhd", "beitai", "leaguetv", "pterweb", "bae", "hdsweb", "720", "hdctv"]
+        criterion_2_list = ["2160p", "1080p"]
+        criterion_3_list = ["cinefeel", "ntb", "tepes", "appletor", "telly", "tommy", "monkee", "kings", "sbr", "don", "btn", "ijp", "t7st", "rcvr", "visum", "ntg", "apj69", "trollhd", "trolluhd", "flux", "sigma", "roccat", "pterweb", "cinefile", "bordure", "leaguenf", "epsilon", "frds"]
+        if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
+            message = f"unwanted"
+        elif "tv" in entry.category.lower() and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list) and any(criterion_3 in entry.title.lower() for criterion_3 in criterion_3_list):
+            message = f"/wink {entry.enclosures[0]['href']}"
+        elif "remux" in entry.title.lower():
+            message = f"/kink {entry.enclosures[0]['href']}"
+        else:
+            message = f"/get {entry.enclosures[0]['href']}"
         try:
           app.send_message(log_channel, message)
           db.update_link(feed_url7, entry.title)
@@ -242,7 +252,7 @@ def check_feed7():
         except Exception as e:
           print(e)
     else:
-      print(f"Checked RSS FEED7 - Erai Batch")      
+      print(f"Checked RSS FEED7 - Hdfans")      
 
       
 if db.get_link(feed_url8) == None:
