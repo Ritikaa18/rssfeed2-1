@@ -105,10 +105,12 @@ def check_feed2():
         criterion_1_list = ["720p", "hdtv", "leagueweb", "lmovhd", "480p", "576p", "cmct", "ltvhd", "beitai", "leaguetv", "pterweb", "bae", "hdsweb", "720", "hdctv"]
         criterion_2_list = ["2160p", "1080p"]
         criterion_3_list = ["cinefeel", "ntb", "tepes", "appletor", "telly", "tommy", "monkee", "kings", "sbr", "don", "btn", "ijp", "t7st", "rcvr", "visum", "ntg", "apj69", "trollhd", "trolluhd", "flux", "sigma", "epsilon", "bordure", "leaguenf", "cinefile"]
-        if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
-            message = f"unwanted"
-        elif "tv" in entry.category.lower() and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list) and any(criterion_3 in entry.title.lower() for criterion_3 in criterion_3_list):
+        if "tv" in entry.category.lower() and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list) and any(criterion_3 in entry.title.lower() for criterion_3 in criterion_3_list):
             message = f"/wink {entry.enclosures[0]['href']}"
+        elif "remux" in entry.title.lower():
+            message = f"/kink {entry.enclosures[0]['href']}"
+        elif any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
+            message = f"unwanted"
         else:
             message = f"/get {entry.enclosures[0]['href']}"
         try:
@@ -235,12 +237,12 @@ def check_feed7():
         criterion_1_list = ["720p", "hdtv", "leagueweb", "lmovhd", "480p", "576p", "cmct", "ltvhd", "beitai", "leaguetv", "pterweb", "bae", "hdsweb", "720", "hdctv"]
         criterion_2_list = ["2160p", "1080p"]
         criterion_3_list = ["cinefeel", "ntb", "tepes", "appletor", "telly", "tommy", "monkee", "kings", "sbr", "don", "btn", "ijp", "t7st", "rcvr", "visum", "ntg", "apj69", "trollhd", "trolluhd", "flux", "sigma", "roccat", "pterweb", "cinefile", "bordure", "leaguenf", "epsilon", "frds"]
-        if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
-            message = f"unwanted"
-        elif "tv" in entry.category.lower() and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list) and any(criterion_3 in entry.title.lower() for criterion_3 in criterion_3_list):
+        if "tv" in entry.category.lower() and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list) and any(criterion_3 in entry.title.lower() for criterion_3 in criterion_3_list):
             message = f"/wink {entry.enclosures[0]['href']}"
         elif "remux" in entry.title.lower():
             message = f"/kink {entry.enclosures[0]['href']}"
+        elif any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
+            message = f"unwanted"
         else:
             message = f"/get {entry.enclosures[0]['href']}"
         try:
