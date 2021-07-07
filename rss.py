@@ -5,6 +5,7 @@ from time import sleep, time
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
 from apscheduler.schedulers.background import BackgroundScheduler
+from requests.utils import requote_uri
 
 
 api_id = ""   # Get it from my.telegram.org
@@ -48,26 +49,23 @@ def check_feed():
     FEED = feedparser.parse(feed_url)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url).link:
-        criterion_1_list = ["720p", "hdtv", "galaxyrg", "mvgroup", "480p", "xvid", "ddr", "brazino777", "armor", "mp4", "melbet", "tgx", "cam", "hdrip", "avi", "web-dlrip", "meguil", "720", "saicord", "hindi"]
-        criterion_2 = "remux"
-        if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
-            message = f"unwanted"
-        elif criterion_2 in entry.title.lower():
-            message = f"/kink {entry.link}"
-        else:    
-            message = f"/mirror {entry.link}"
-        try:
-          app.send_message(log_channel, message)
-          db.update_link(feed_url, entry.id)
-        except FloodWait as e:
-          print(f"FloodWait: {e.x} seconds")
-          sleep(e.x)
-        except Exception as e:
-          print(e)
+      criterion_1_list = ["1080p", "megusta"]
+      if all(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
+        message = f"/dank {entry['torrent_magneturi']}"
+      else:
+        message = f"unwanted"
+      try:
+        app.send_message(log_channel, message)
+        db.update_link(feed_url, entry.id)
+      except FloodWait as e:
+        print(f"FloodWait: {e.x} seconds")
+        sleep(e.x)
+      except Exception as e:
+        print(e)
     else:
-      print(f"Checked RSS FEED - TGx Movies")
+      print(f"Checked RSS FEED - EZTV")
+      
 
-            
 if db.get_link(feed_url1) == None:
    db.update_link(feed_url1, "*")
 
@@ -76,32 +74,7 @@ app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 def check_feed1():
     FEED = feedparser.parse(feed_url1)
     entry = FEED.entries[0]
-    if entry.id != db.get_link(feed_url1).link:
-        criterion_1_list = ["720p", "hdtv", "galaxyrg", "mvgroup", "480p", "xvid", "ion10"]
-        if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
-            message = f"unwanted"
-        else:
-            message = f"/dank {entry.link}"
-        try:
-          app.send_message(log_channel, message)
-          db.update_link(feed_url1, entry.id)
-        except FloodWait as e:
-          print(f"FloodWait: {e.x} seconds")
-          sleep(e.x)
-        except Exception as e:
-          print(e)
-    else:
-      print(f"Checked RSS FEED1 - RARBG TV")
-
-if db.get_link(feed_url2) == None:
-   db.update_link(feed_url2, "*")
-
-app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)      
-      
-def check_feed2():
-    FEED = feedparser.parse(feed_url2)
-    entry = FEED.entries[0]
-    if entry.link != db.get_link(feed_url2).link:
+    if entry.link != db.get_link(feed_url1).link:
         criterion_1_list = ["720p", "hdtv", "leagueweb", "lmovhd", "480p", "576p", "cmct", "ltvhd", "beitai", "leaguetv", "pterweb", "bae", "hdsweb", "720", "hdctv"]
         criterion_2_list = ["2160p", "1080p"]
         criterion_3_list = ["cinefeel", "ntb", "tepes", "appletor", "telly", "tommy", "monkee", "kings", "sbr", "don", "btn", "ijp", "t7st", "rcvr", "visum", "ntg", "apj69", "trollhd", "trolluhd", "flux", "sigma", "epsilon", "bordure", "leaguenf", "cinefile"]
@@ -115,16 +88,45 @@ def check_feed2():
             message = f"/get {entry.enclosures[0]['href']}"
         try:
           app.send_message(log_channel, message)
-          db.update_link(feed_url2, entry.link)
+          db.update_link(feed_url1, entry.link)
         except FloodWait as e:
           print(f"FloodWait: {e.x} seconds")
           sleep(e.x)
         except Exception as e:
           print(e)
     else:
-      print(f"Checked RSS FEED2 - LHD Encodes")
+      print(f"Checked RSS FEED1 - LHD Encodes")
             
 
+if db.get_link(feed_url2) == None:
+   db.update_link(feed_url2, "*")
+
+app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)      
+      
+def check_feed2():
+    FEED = feedparser.parse(feed_url2)
+    entry = FEED.entries[0]
+    if entry.id != db.get_link(feed_url2).link:
+      criterion_1_list = ["720p", "hdtv", "tgx", "brazino777", "yts", "480p", "576p", "xvid", "hdrip", "cam", "avi", "mp4", "galaxyrg", "domino", "armor", "ep", "msltel", "hindi", "megapeer", "avc", "1400mb", "episode", "web-dlrip", "season", "1920", "1440", "ion10", "720", "playlist", "rarbg", "fgt"]
+      criterion_2 = "remux"
+      if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
+          message = f"unwanted"
+      elif criterion_2 in entry.title.lower():
+          message = f"/kink {requote_uri(entry.enclosures[0]['href'])}"           
+      else:
+          message = f"/mirror {requote_uri(entry.enclosures[0]['href'])}"
+      try:
+        app.send_message(log_channel, message)
+        db.update_link(feed_url2, entry.id)
+      except FloodWait as e:
+        print(f"FloodWait: {e.x} seconds")
+        sleep(e.x)
+      except Exception as e:
+        print(e)
+    else:
+      print(f"Checked RSS FEED2 - Lime Movies")  
+      
+        
 if db.get_link(feed_url3) == None:
    db.update_link(feed_url3, "*")
 
@@ -133,36 +135,7 @@ app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 def check_feed3():
     FEED = feedparser.parse(feed_url3)
     entry = FEED.entries[0]
-    if entry.id != db.get_link(feed_url3).link:
-      criterion_1_list = ["720p", "hdtv", "tgx", "brazino777", "yts", "480p", "576p", "xvid", "hdrip", "cam", "avi", "mp4", "galaxyrg", "domino", "armor", "ep", "msltel", "hindi", "megapeer", "avc", "1400mb", "episode", "web-dlrip", "season", "1920", "1440", "ion10", "720", "playlist", "rarbg", "fgt"]
-      criterion_2 = "remux"
-      if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
-          message = f"unwanted"
-      elif criterion_2 in entry.title.lower():
-          message = f"/kink {entry.enclosures[0]['href']}"            
-      else:
-          message = f"/mirror {entry.enclosures[0]['href']}"
-      try:
-        app.send_message(log_channel, message)
-        db.update_link(feed_url3, entry.id)
-      except FloodWait as e:
-        print(f"FloodWait: {e.x} seconds")
-        sleep(e.x)
-      except Exception as e:
-        print(e)
-    else:
-      print(f"Checked RSS FEED3 - Lime Movies")  
-      
-        
-if db.get_link(feed_url4) == None:
-   db.update_link(feed_url4, "*")
-
-app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)      
-      
-def check_feed4():
-    FEED = feedparser.parse(feed_url4)
-    entry = FEED.entries[0]
-    if entry.link != db.get_link(feed_url4).link:
+    if entry.link != db.get_link(feed_url3).link:
         criterion_1_list = ["1080p", "freeleech"]
         criterion_2_list = ["cinefeel", "ntb", "tepes", "playweb", "telly", "tommy", "monkee", "kings", "sbr", "don", "btn", "ijp", "t7st", "rcvr", "visum", "ntg", "apj69", "trollhd", "trolluhd", "appletor", "flux", "sigma"]
         if all(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list) and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list):
@@ -171,14 +144,43 @@ def check_feed4():
             message = f"unwanted"
         try:
           app.send_message(log_channel, message)
-          db.update_link(feed_url4, entry.link)
+          db.update_link(feed_url3, entry.link)
         except FloodWait as e:
           print(f"FloodWait: {e.x} seconds")
           sleep(e.x)
         except Exception as e:
           print(e)
     else:
-      print(f"Checked RSS FEED4 - Filelist")
+      print(f"Checked RSS FEED3 - Filelist")             
+ 
+
+if db.get_link(feed_url4) == None:
+   db.update_link(feed_url4, "*")
+
+app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)      
+      
+def check_feed4():
+    FEED = feedparser.parse(feed_url4)
+    entry = FEED.entries[0]
+    if entry.id != db.get_link(feed_url4).link:
+        criterion_1_list = ["720p", "hdtv", "brazino777", "yts", "480p", "576p", "xvid", "hdrip", "cam", "avi", "mp4", "galaxyrg", "domino", "armor", "ep", "msltel", "hindi", "megapeer", "avc", "1400mb", "episode", "web-dlrip", "season", "1920", "1440", "ion10", "rarbg"]
+        criterion_2 = "remux"
+        if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
+            message = f"unwanted"
+        elif criterion_2 in entry.title.lower():
+            message = f"/kink {entry.enclosures[0]['href']}"
+        else:
+            message = f"/mirror {entry.enclosures[0]['href']}"
+        try:
+          app.send_message(log_channel, message)
+          db.update_link(feed_url4, entry.id)
+        except FloodWait as e:
+          print(f"FloodWait: {e.x} seconds")
+          sleep(e.x)
+        except Exception as e:
+          print(e)
+    else:
+      print(f"Checked RSS FEED4 - TorrentFunk Movies")      
 
       
 if db.get_link(feed_url5) == None:
@@ -189,20 +191,27 @@ app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 def check_feed5():
     FEED = feedparser.parse(feed_url5)
     entry = FEED.entries[0]
-    if entry.title != db.get_link(feed_url5).link:
-        message = f"/nani {entry.link}"
-        try:
-          app.send_message(log_channel, message)
-          db.update_link(feed_url5, entry.title)
-        except FloodWait as e:
-          print(f"FloodWait: {e.x} seconds")
-          sleep(e.x)
-        except Exception as e:
-          print(e)
+    if entry.id != db.get_link(feed_url5).link:
+       criterion_1 = "1080p"
+       criterion_2_list = ["wiki", "beast", "chd", "ank", "lhd"]
+       if criterion_1 in entry.title.lower() and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list):         
+         message = f"/get {entry.enclosures[0]['href']}"
+       elif 'remux' in entry.title.lower():
+         message = f"/kink {entry.enclosures[0]['href']}"
+       else:
+         message = f"unwanted"
+       try:
+        app.send_message(log_channel, message)
+        db.update_link(feed_url5, entry.id)
+       except FloodWait as e:
+        print(f"FloodWait: {e.x} seconds")
+        sleep(e.x)
+       except Exception as e:
+        print(e)
     else:
-      print(f"Checked RSS FEED5 - Erai Encodes 1080p")      
-      
+      print(f"Checked RSS FEED5 - HDTime Encodes")           
 
+      
 if db.get_link(feed_url6) == None:
    db.update_link(feed_url6, "*")
 
@@ -211,19 +220,23 @@ app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 def check_feed6():
     FEED = feedparser.parse(feed_url6)
     entry = FEED.entries[0]
-    if entry.title != db.get_link(feed_url6).link:
-        message = f"/nani {entry.link}"
-        try:
-          app.send_message(log_channel, message)
-          db.update_link(feed_url6, entry.title)
-        except FloodWait as e:
-          print(f"FloodWait: {e.x} seconds")
-          sleep(e.x)
-        except Exception as e:
-          print(e)
+    if entry.link != db.get_link(feed_url6).link:
+      criterion_1 = "remux"
+      if criterion_1 in entry.title.lower():
+        message = f"/kink {entry.enclosures[0]['href']}"
+      else:
+        message = f"/get {entry.enclosures[0]['href']}"
+      try:
+        app.send_message(log_channel, message)
+        db.update_link(feed_url6, entry.link)
+      except FloodWait as e:
+        print(f"FloodWait: {e.x} seconds")
+        sleep(e.x)
+      except Exception as e:
+        print(e)
     else:
-      print(f"Checked RSS FEED6 - Erai 1080p")       
- 
+      print(f"Checked RSS FEED6 - LHD REMUX")       
+      
 
 if db.get_link(feed_url7) == None:
    db.update_link(feed_url7, "*")
@@ -233,28 +246,23 @@ app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 def check_feed7():
     FEED = feedparser.parse(feed_url7)
     entry = FEED.entries[0]
-    if entry.id != db.get_link(feed_url7).link:
-        criterion_1_list = ["720p", "hdtv", "leagueweb", "lmovhd", "480p", "576p", "cmct", "ltvhd", "beitai", "leaguetv", "pterweb", "bae", "hdsweb", "720", "hdctv"]
-        criterion_2_list = ["2160p", "1080p"]
-        criterion_3_list = ["cinefeel", "ntb", "tepes", "appletor", "telly", "tommy", "monkee", "kings", "sbr", "don", "btn", "ijp", "t7st", "rcvr", "visum", "ntg", "apj69", "trollhd", "trolluhd", "flux", "sigma", "roccat", "pterweb", "cinefile", "bordure", "leaguenf", "epsilon", "frds"]
-        if "tv" in entry.category.lower() and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list) and any(criterion_3 in entry.title.lower() for criterion_3 in criterion_3_list):
-            message = f"/wink {entry.enclosures[0]['href']}"
-        elif "remux" in entry.title.lower():
-            message = f"/kink {entry.enclosures[0]['href']}"
-        elif any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
-            message = f"unwanted"
-        else:
-            message = f"/get {entry.enclosures[0]['href']}"
-        try:
-          app.send_message(log_channel, message)
-          db.update_link(feed_url7, entry.id)
-        except FloodWait as e:
-          print(f"FloodWait: {e.x} seconds")
-          sleep(e.x)
-        except Exception as e:
-          print(e)
+    if entry.link != db.get_link(feed_url7).link:
+      criterion_1 = "1080p"
+      criterion_2_list = ["playhd", "ift", "ctrlhd", "lord", "don", "zq", "viethd", "tayto", "sa89", "gyroscope", "ebp"]
+      if criterion_1 in entry.title and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list):
+        message = f"/mirror2 {entry.link}"
+      else:
+        message = f"unwanted"
+      try:
+        app.send_message(log_channel, message)
+        db.update_link(feed_url7, entry.link)
+      except FloodWait as e:
+        print(f"FloodWait: {e.x} seconds")
+        sleep(e.x)
+      except Exception as e:
+        print(e)
     else:
-      print(f"Checked RSS FEED7 - Hdfans")      
+      print(f"Checked RSS FEED7 - Filelist 1080p")      
 
       
 if db.get_link(feed_url8) == None:
@@ -266,24 +274,22 @@ def check_feed8():
     FEED = feedparser.parse(feed_url8)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url8).link:
-       criterion_1 = "1080p"
-       criterion_2_list = ["wiki", "beast", "chd", "ank", "lhd"]
-       if criterion_1 in entry.title.lower() and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list):         
-         message = f"/get {entry.enclosures[0]['href']}"
-       elif 'remux' in entry.title.lower():
-         message = f"/kink {entry.enclosures[0]['href']}"
-       else:
-         message = f"unwanted"
-       try:
+      criterion_1 = "1080p"
+      criterion_2_list = ["-ks-", "iahd", "kaidubs", "judas", "anime time", "golumpa", "subsplease"]
+      if criterion_1 in entry.title and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list):
+        message = f"/anime {entry.link}"
+      else:
+        message = f"infinity is gei"
+      try:
         app.send_message(log_channel, message)
         db.update_link(feed_url8, entry.id)
-       except FloodWait as e:
+      except FloodWait as e:
         print(f"FloodWait: {e.x} seconds")
         sleep(e.x)
-       except Exception as e:
+      except Exception as e:
         print(e)
     else:
-      print(f"Checked RSS FEED8 - HDTime Encodes")           
+      print(f"Checked RSS FEED8 - Nyaa")            
       
         
 scheduler = BackgroundScheduler()
