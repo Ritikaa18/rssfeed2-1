@@ -163,14 +163,14 @@ def check_feed4():
     FEED = feedparser.parse(feed_url4)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url4).link:
-        criterion_1_list = ["720p", "hdtv", "brazino777", "yts", "480p", "576p", "xvid", "www", "1600", "hdrip", "cam", "avi", "mp4", "galaxyrg", "domino", "armor", "ep", "msltel", "hindi", "megapeer", "avc", "1400mb", "episode", "web-dlrip", "season", "1920", "1440", "ion10", "rarbg"]
+        criterion_1_list = ["x265"]
         criterion_2 = "remux"
         if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
-            message = f"unwanted"
+            message = f"/mirror {entry.enclosures[0]['href']}"
         elif criterion_2 in entry.title.lower():
             message = f"/kink {entry.enclosures[0]['href']}"
         else:
-            message = f"/mirror {entry.enclosures[0]['href']}"
+            message = f"unwanted"
         try:
           app.send_message(log_channel, message)
           db.update_link(feed_url4, entry.id)
