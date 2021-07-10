@@ -107,7 +107,7 @@ def check_feed2():
     FEED = feedparser.parse(feed_url2)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url2).link:
-      criterion_1_list = ["gerald", "dovi", "hevc", "x265"]
+      criterion_1_list = ["gerald", "dovi", "bdrip", "x265"]
       criterion_2 = "remux"
       if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
           message = f"/mirror {requote_uri(entry.enclosures[0]['href'])}"
@@ -163,7 +163,7 @@ def check_feed4():
     FEED = feedparser.parse(feed_url4)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url4).link:
-        criterion_1_list = ["x265"]
+        criterion_1_list = ["x265", "bdrip"]
         criterion_2 = "remux"
         if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
             message = f"/mirror {entry.enclosures[0]['href']}"
