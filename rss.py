@@ -107,11 +107,12 @@ def check_feed2():
     FEED = feedparser.parse(feed_url2)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url2).link:
-      criterion_1_list = ["gerald", "dovi", "x265", "bdrip"]
-      criterion_2 = "remux"
-      if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list):
+      criterion_1_list = ["1080p", "2160p"]
+      criterion_2_list = ["gerald", "dovi", "x265", "bdrip"]
+      criterion_3 = "remux"
+      if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list) and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list):
           message = f"/mirror {requote_uri(entry.enclosures[0]['href'])}"
-      elif criterion_2 in entry.title.lower():
+      elif criterion_3 in entry.title.lower():
           message = f"/kink {requote_uri(entry.enclosures[0]['href'])}"           
       else:
           message = f"unwanted"
