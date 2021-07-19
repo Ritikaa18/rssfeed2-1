@@ -28,6 +28,7 @@ if os.environ.get("ENV"):   # Add a ENV in Environment Variables if you wanna co
   api_hash = os.environ.get("API_HASH")
   feed_url = os.environ.get("FEED_URL")
   feed_url1 = os.environ.get("FEED_URL1")
+  feed_url2 = os.environ.get("FEED_URL2")
   feed_url3 = os.environ.get("FEED_URL3")
   feed_url5 = os.environ.get("FEED_URL5")
   feed_url6 = os.environ.get("FEED_URL6")
@@ -94,6 +95,35 @@ def check_feed1():
           print(e)
     else:
       print(f"Checked RSS FEED1 - LHD Encodes")
+
+if db.get_link(feed_url2) == None:
+   db.update_link(feed_url2, "*")
+
+app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)      
+
+def check_feed2():
+    FEED = feedparser.parse(feed_url2)
+    entry = FEED.entries[0]
+    if entry.id != db.get_link(feed_url2).link:
+      criterion_1_list = ["1080p", "2160p"]
+      criterion_2_list = ["gerald", "dovi", "bhd", "zgxyi", "bbqddq", "club", "exkinoray", "selezen"]
+      criterion_3 = "remux"
+      if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list) and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list):
+          message = f"/chink {requote_uri(entry.enclosures[0]['href'])}"
+      elif criterion_3 in entry.title.lower():
+          message = f"/kink {requote_uri(entry.enclosures[0]['href'])}"           
+      else:
+          message = f"unwanted"
+      try:
+        app.send_message(log_channel, message)
+        db.update_link(feed_url2, entry.id)
+      except FloodWait as e:
+        print(f"FloodWait: {e.x} seconds")
+        sleep(e.x)
+      except Exception as e:
+        print(e)
+    else:
+      print(f"Checked RSS FEED2 - Torlock Movies")  
             
         
 if db.get_link(feed_url3) == None:
@@ -235,6 +265,7 @@ def check_feed8():
 scheduler = BackgroundScheduler()
 scheduler.add_job(check_feed, "interval", seconds=check_interval, max_instances=max_instances, misfire_grace_time=None)
 scheduler.add_job(check_feed1, "interval", seconds=check_interval, max_instances=max_instances, misfire_grace_time=None)
+scheduler.add_job(check_feed2, "interval", seconds=check_interval, max_instances=max_instances, misfire_grace_time=None)
 scheduler.add_job(check_feed3, "interval", seconds=check_interval, max_instances=max_instances, misfire_grace_time=None)
 scheduler.add_job(check_feed5, "interval", seconds=check_interval, max_instances=max_instances, misfire_grace_time=None)
 scheduler.add_job(check_feed6, "interval", seconds=check_interval, max_instances=max_instances, misfire_grace_time=None)
