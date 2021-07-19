@@ -106,12 +106,12 @@ def check_feed2():
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url2).link:
       criterion_1_list = ["1080p", "2160p"]
-      criterion_2_list = ["gerald", "bhd", "zgxyi", "bbqddq", "club", "exkinoray"]
+      criterion_2_list = ["gerald", "bhd", "zgxyi", "bbqddq", "club", "exkinoray", "selezen", "dovi"]
       criterion_3 = "remux"
-      if any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list) and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list):
-          message = f"/chink {requote_uri(entry.enclosures[0]['href'])}"
-      elif criterion_3 in entry.title.lower():
-          message = f"/kink {requote_uri(entry.enclosures[0]['href'])}"           
+      if criterion_3 in entry.title.lower():
+          message = f"/kink {requote_uri(entry.enclosures[0]['href'])}"
+      elif any(criterion_1 in entry.title.lower() for criterion_1 in criterion_1_list) and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list):
+          message = f"/chink {requote_uri(entry.enclosures[0]['href'])}"           
       else:
           message = f"unwanted"
       try:
