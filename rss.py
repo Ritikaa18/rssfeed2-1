@@ -74,7 +74,7 @@ def check_feed1():
     FEED = feedparser.parse(feed_url1)
     entry = FEED.entries[0]
     if entry.link != db.get_link(feed_url1).link:
-        criterion_1_list = ["720p", "hdtv", "leagueweb", "lmovhd", "480p", "576p", "cmct", "ltvhd", "beitai", "leaguetv", "pterweb", "bae", "hdsweb", "720", "hdctv"]
+        criterion_1_list = ["720p", "hdtv", "leagueweb", "yts", "yify", "lmovhd", "480p", "576p", "cmct", "ltvhd", "beitai", "leaguetv", "pterweb", "bae", "hdsweb", "720", "hdctv"]
         criterion_2_list = ["2160p", "1080p"]
         criterion_3_list = ["cinefeel", "ntb", "tepes", "appletor", "telly", "tommy", "monkee", "kings", "sbr", "don", "btn", "ijp", "t7st", "rcvr", "visum", "ntg", "apj69", "trollhd", "trolluhd", "flux", "sigma", "epsilon", "bordure", "leaguenf", "cinefile"]
         if "tv" in entry.category.lower() and any(criterion_2 in entry.title.lower() for criterion_2 in criterion_2_list) and any(criterion_3 in entry.title.lower() for criterion_3 in criterion_3_list):
